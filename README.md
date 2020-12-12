@@ -1,2 +1,3 @@
 # covid-dashboard
-App covid dashboard. HTML + CSS (SCSS) + JavaScript.
+App covid dashboard. HTML + CSS (SCSS) + JavaScript.  
+See app: https://sitecreator143.github.io/covid-dashboard/.
