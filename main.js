@@ -16,7 +16,7 @@ let yyyy = 0
 const arrarr = ['RU','AF', , 'AL', 'AL']
 xxxx.addEventListener('click', () => {
     yyyy = (yyyy + 1) % 5
-    newChart.getChart(arrarr[yyyy], 2);
+    newChart.getChart(arrarr[yyyy], 2, 'red');
 })
 
 

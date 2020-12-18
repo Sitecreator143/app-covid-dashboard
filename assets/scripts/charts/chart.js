@@ -16,7 +16,7 @@ export class Chart {
         this.chartFigure.appendChild(this.chartDescription);
     }
 
-    getChart(country = 'WD', type = 0) {
+    getChart(country = 'WD', type = 0, customColor) {
         const url = country === 'WD' ? 'https://covid19-api.org/api/timeline' : `https://covid19-api.org/api/timeline/${country}`
         fetch(url)
         .then((response) => {
@@ -25,8 +25,11 @@ export class Chart {
         .then((data) => {
             this.getCountry(country)
             this.transformData(data)
-            this.changeChartType(type)
-            this.drawChart(this.getChartType(type).data, this.dates, this.country, this.getChartType(type).color, this.getChartType(type).type)
+            this.changeChartType(type, customColor)
+            this.drawChart(this.getChartType(type).data, this.dates, this.country, this.getChartType(type).color, this.getChartType(type).type, customColor)
+        })
+        .catch((error) => {
+            console.log(`Error: data`)
         })
     }
 
@@ -62,25 +65,34 @@ export class Chart {
         this.country = country !== 'WD' ? countryList.find((el) => el.alpha2 === country).name : 'World'
     }
 
-    changeChartType(type) {
+    changeChartType(type, customColor) {
         const changeChartTypeByClick = () => {
             type = (type + 1) % 3
-            this.drawChart(this.getChartType(type).data, this.dates, this.country, this.getChartType(type).color, this.getChartType(type).type)
+            this.drawChart(this.getChartType(type).data, this.dates, this.country, this.getChartType(type).color, this.getChartType(type).type, customColor)
         }
         this.chartDescription.removeEventListener('click', changeChartTypeByClick)
         this.chartDescription.addEventListener('click', changeChartTypeByClick)
     }
 
-    drawChart(data, dates, country, color, type) {
+    drawChart(data, dates, country, color, type, lineColor = '#b9b9b9') {
         this.chartDescription.innerText = type;
+        this.chartDescription.style.color = lineColor;
         Highcharts.chart('container', {
             credits: { enabled: false },
             chart: { backgroundColor: '#32476b', type: 'area' },
-            title: { style: { "color": "#b9b9b9", "fontSize": "14px" }, text: country },
+            title: { 
+                style: { "color": lineColor, "fontSize": "14px", fontFamily: "Montserrat"}, 
+                text: country },
             xAxis: {
                 allowDecimals: false,
+                lineColor: lineColor,
+                tickColor: lineColor,
                 labels: {                    
-                    style: { color: "#b9b9b9" },
+                    style: { 
+                        color: lineColor,
+                        fontSize: '11px',
+                        fontFamily: "Montserrat"
+                    },
                     formatter: function () {
                         const options = {
                             month: 'long'
@@ -91,9 +103,14 @@ export class Chart {
                 }
             },
             yAxis: {
+                gridLineColor: lineColor,
                 title: { text: '' },
                 labels: {                    
-                    style: { color: "#b9b9b9" },
+                    style: { 
+                        color: lineColor,
+                        fontSize: '11px',
+                        fontFamily: "Montserrat"
+                    },
                 }
             },
             tooltip: {
