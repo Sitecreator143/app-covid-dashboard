@@ -1,7 +1,3 @@
-# COVID-19
-https://github.com/rolling-scopes-school/tasks/blob/master/tasks/covid-dashboard.md
-
-## deploy
-https://maxtadont.github.io/COVID-19/
-
-
+# covid-dashboard
+App covid dashboard. HTML + CSS (SCSS) + JavaScript.  
+See app: https://sitecreator143.github.io/app-covid-dashboard/.
