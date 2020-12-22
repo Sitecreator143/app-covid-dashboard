@@ -1,5 +1,7 @@
-# COVID-19  
-Team task  
-See app: https://sitecreator143.github.io/app-covid-dashboard/
+# COVID-19
+https://github.com/rolling-scopes-school/tasks/blob/master/tasks/covid-dashboard.md
+
+## deploy
+https://maxtadont.github.io/COVID-19/
 
 
